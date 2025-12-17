@@ -1,6 +1,4 @@
-﻿using Lab04.Models;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lab04.Models;
 
 namespace Lab04
 {
@@ -140,6 +139,24 @@ namespace Lab04
             context = new StudentContextDB();
             List<Student> listStudents = context.Student.ToList();
             BindGrid(listStudents);
+        }
+
+        /// <summary>
+        /// Reload lại ComboBox Khoa sau khi có thay đổi từ form Quản lý Khoa
+        /// </summary>
+        private void ReloadComboBoxKhoa()
+        {
+            try
+            {
+                context = new StudentContextDB();
+                List<Faculty> listFaculties = context.Faculty.ToList();
+                FillFacultyCombobox(listFaculties);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi reload ComboBox: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 
@@ -293,11 +310,29 @@ namespace Lab04
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
+
+        #region Menu Events
+        /// <summary>
+        /// Menu Quản lý khoa (F2)
+        /// </summary>
+        private void quanLyKhoaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFormQuanLyKhoa();
+        }
 
         /// <summary>
-        /// Sự kiện nút Thoát - Đóng form
+        /// Menu Tìm kiếm (Ctrl+F)
         /// </summary>
-        private void btnThoat_Click(object sender, EventArgs e)
+        private void timKiemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFormTimKiem();
+        }
+
+        /// <summary>
+        /// Menu Thoát
+        /// </summary>
+        private void thoatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
                 "Bạn có chắc chắn muốn thoát?",
@@ -307,8 +342,50 @@ namespace Lab04
 
             if (result == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
             }
+        }
+        #endregion
+
+        #region ToolStrip Events
+        /// <summary>
+        /// ToolStrip Button Quản lý khoa
+        /// </summary>
+        private void tsbQuanLyKhoa_Click(object sender, EventArgs e)
+        {
+            OpenFormQuanLyKhoa();
+        }
+
+        /// <summary>
+        /// ToolStrip Button Tìm kiếm
+        /// </summary>
+        private void tsbTimKiem_Click(object sender, EventArgs e)
+        {
+            OpenFormTimKiem();
+        }
+        #endregion
+
+        #region Helper Methods for Opening Forms
+        /// <summary>
+        /// Mở form Quản lý Khoa
+        /// </summary>
+        private void OpenFormQuanLyKhoa()
+        {
+            frmFaculty frmKhoa = new frmFaculty();
+            frmKhoa.ShowDialog();
+
+            // Sau khi đóng form Khoa, reload lại ComboBox Khoa và DataGridView
+            ReloadComboBoxKhoa();
+            ReloadData();
+        }
+
+        /// <summary>
+        /// Mở form Tìm kiếm
+        /// </summary>
+        private void OpenFormTimKiem()
+        {
+            frmSearch frmTimKiem = new frmSearch();
+            frmTimKiem.ShowDialog();
         }
         #endregion
 

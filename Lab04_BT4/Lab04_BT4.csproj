@@ -5,10 +5,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B0440C7E-5649-4E6B-8871-55C99C123E17}</ProjectGuid>
+    <ProjectGuid>{656CD4E4-8A4A-412C-8504-13CC8BAC9182}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Lab04</RootNamespace>
-    <AssemblyName>Lab04</AssemblyName>
+    <RootNamespace>Lab04_BT4</RootNamespace>
+    <AssemblyName>Lab04_BT4</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -58,27 +58,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmFaculty.cs">
+    <Compile Include="frmOrderInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmFaculty.Designer.cs">
-      <DependentUpon>frmFaculty.cs</DependentUpon>
+    <Compile Include="frmOrderInfo.Designer.cs">
+      <DependentUpon>frmOrderInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmSearch.Designer.cs">
-      <DependentUpon>frmSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmStudentManagement.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmStudentManagement.Designer.cs">
-      <DependentUpon>frmStudentManagement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Faculty.cs" />
-    <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentContextDB.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductOrderContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,4 +1,4 @@
-namespace Lab04.Models
+namespace Lab04_BT4.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,25 +6,27 @@ namespace Lab04.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Faculty")]
-    public partial class Faculty
+    [Table("Invoice")]
+    public partial class Invoice
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Faculty()
+        public Invoice()
         {
-            Student = new HashSet<Student>();
+            Order = new HashSet<Order>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int FacultyID { get; set; }
+        [Key]
+        [StringLength(20)]
+        public string InvoiceNo { get; set; }
 
-        [Required]
-        [StringLength(200)]
-        public string FacultyName { get; set; }
+        public DateTime OrderDate { get; set; }
 
-        public int? TotalProfessor { get; set; }  // <-- THÊM DÒNG NÀY
+        public DateTime DeliveryDate { get; set; }
+
+        [StringLength(255)]
+        public string Note { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Student> Student { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }
